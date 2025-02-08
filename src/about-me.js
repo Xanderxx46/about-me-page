@@ -43,16 +43,6 @@ const previewData = {
 			url: "https://www.minecraft.net/en-us/download/server",
 		},
 		{
-			name: "",
-			iconName: "",
-			url: "",
-		},
-		{
-			name: "",
-			iconName: "",
-			url: "",
-		},
-		{
 			name: "Carbon",
 			iconName: "Carbon",
 			url: "https://carbon.buape.com",
@@ -61,16 +51,6 @@ const previewData = {
 			name: "React",
 			iconName: "React",
 			url: "https://react.dev",
-		},
-		{
-			name: "",
-			iconName: "",
-			url: "",
-		},
-		{
-			name: "",
-			iconName: "",
-			url: "",
 		},
 	],
 	projects: [
@@ -234,7 +214,7 @@ const AboutMePreview = () => {
 					<h2 className="text-center text-2xl font-bold text-white mb-4">
 						Skills
 					</h2>
-					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+					<div className="justify-center grid grid-cols-2	 md:grid-cols-3 lg:grid-cols-4 gap-4">
 						{previewData.skills.map((skill) => (
 							<SkillCard
 								key={skill.name}
