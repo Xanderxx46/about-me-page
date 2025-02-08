@@ -1,8 +1,17 @@
 import React from "react";
-import { Github, Mail, ExternalLink, Globe, Server } from "lucide-react";
+import { Github, Mail, ExternalLink } from "lucide-react";
 
 import { BsDiscord } from "react-icons/bs";
-import { FaGithub } from "react-icons/fa";
+
+import { IoLogoJavascript } from "react-icons/io5";
+
+import { SiTypescript } from "react-icons/si";
+
+import { FaHtml5, FaCss3Alt, FaNode, FaReact } from "react-icons/fa";
+
+import { TbBrandMinecraft, TbBrandCarbon } from "react-icons/tb";
+
+import { VscBlank } from "react-icons/vsc";
 
 // Mock data for preview with added URLs
 const previewData = {
@@ -29,9 +38,39 @@ const previewData = {
 			url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
 		},
 		{
-			name: "MC Servers",
+			name: "MC Plugins",
 			iconName: "Server",
 			url: "https://www.minecraft.net/en-us/download/server",
+		},
+		{
+			name: "",
+			iconName: "",
+			url: "",
+		},
+		{
+			name: "",
+			iconName: "",
+			url: "",
+		},
+		{
+			name: "Carbon",
+			iconName: "Carbon",
+			url: "https://carbon.buape.com",
+		},
+		{
+			name: "React",
+			iconName: "React",
+			url: "https://react.dev",
+		},
+		{
+			name: "",
+			iconName: "",
+			url: "",
+		},
+		{
+			name: "",
+			iconName: "",
+			url: "",
 		},
 	],
 	projects: [
@@ -45,7 +84,7 @@ const previewData = {
 		{
 			title: "USA Core",
 			description: "Utility Bot for an Arma-3 Unit",
-			tech: "Typescript, Carbon",
+			tech: "Typescript, Carbon, Kiai API",
 			liveUrl: "https://github.com/a3-us-army/USA-Core",
 			githubUrl: "https://github.com/a3-us-army/USA-Core",
 		},
@@ -58,7 +97,7 @@ const previewData = {
 		},
 		{
 			title: "Emberisles",
-			description: "Minecraft server i helped make.",
+			description: "Minecraft server I helped make.",
 			tech: "MC Plugins",
 			liveUrl: "https://discord.gg/hbSPbxnkH9",
 			githubUrl: "https://discord.gg/hbSPbxnkH9",
@@ -82,15 +121,17 @@ const previewData = {
 
 const TechIcon = ({ name }) => {
 	const icons = {
-		JavaScript: <Globe className="text-yellow-400" />,
-		TypeScript: <Globe className="text-blue-400" />,
-		NodeJS: <Server className="text-green-400" />,
-		HTML: <Globe className="text-orange-400" />,
-		CSS: <Globe className="text-blue-500" />,
-		Server: <Server className="text-purple-400" />,
+		JavaScript: <IoLogoJavascript className="text-yellow-400" size="28" />,
+		TypeScript: <SiTypescript className="text-blue-400" size="28" />,
+		NodeJS: <FaNode className="text-green-400" size="28" />,
+		HTML: <FaHtml5 className="text-orange-400" size="28" />,
+		CSS: <FaCss3Alt className="text-blue-500" size="28" />,
+		Server: <TbBrandMinecraft className="text-purple-400" size="28" />,
+		Carbon: <TbBrandCarbon className="text-blue-200" size="28" />,
+		React: <FaReact className="text-blue-600" size="28" />,
 	};
 
-	return icons[name] || <Globe className="text-gray-400" />;
+	return icons[name] || <VscBlank className="text-gray-400" />;
 };
 
 const ProjectCard = ({ project }) => {
