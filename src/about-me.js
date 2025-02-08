@@ -257,9 +257,9 @@ const AboutMePreview = () => {
 					</div>
 				</section>
 
-				<section className="bg-gray-800 rounded-lg shadow-md p-8 border border-purple-700/30">
+				<section className="bg-gray-800 rounded-lg shadow-md p-8 border border-purple-700/30 text-center items-center">
 					<h2 className="text-2xl font-bold text-white mb-4">Get in Touch</h2>
-					<div className="items-center gap-4 flex">
+					<div className="items-center justify-center gap-4 flex text-center">
 						<a
 							href="https://github.com/Xanderxx46"
 							className="text-purple-300 hover:text-purple-400 transition-colors"
@@ -274,7 +274,7 @@ const AboutMePreview = () => {
 						</a>
 						<a
 							href="mailto:main@xanderxx.xyz"
-							className="text-purple-300 hover:text-purple-400 transition-colors"
+							className="text-purple-300 hover:text-purple-400 transition-colors text-center"
 						>
 							<Mail size={24} />
 						</a>
