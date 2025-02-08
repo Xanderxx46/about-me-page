@@ -66,7 +66,7 @@ const ProjectsPage = () => {
 			title: "A-3 US Army Website",
 			description: "Website for an Arma-3 Unit im in!",
 			longDescription:
-				"A comprehensive website built for an Arma-3 military simulation unit. Features include member profiles, mission archives, and unit information.",
+				"A comprehensive website built for an Arma-3 military simulation unit. Features include staff information, social media accounts, and unit information.",
 			tech: ["React", "HTML", "CSS"],
 			category: "web",
 			liveUrl: "https://cag-ussof.org",
@@ -76,34 +76,31 @@ const ProjectsPage = () => {
 			title: "USA Core",
 			description: "Utility Bot for an Arma-3 Unit",
 			longDescription:
-				"A feature-rich Discord bot developed specifically for managing and enhancing the Arma-3 unit's operations. Includes command handling, event management, and member tracking.",
+				"A feature-rich Discord bot developed specifically for managing and enhancing the Arma-3 unit's operations. ",
 			tech: ["TypeScript", "Carbon", "Kiai API"],
 			category: "bot",
 			liveUrl: "https://github.com/a3-us-army/USA-Core",
 			githubUrl: "https://github.com/a3-us-army/USA-Core",
-			image: "/api/placeholder/800/400",
 		},
 		{
 			title: "That One Friend",
 			description: "Discord bot I made for a compitition.",
 			longDescription:
-				"A competitive entry Discord bot showcasing advanced features and unique functionality. Built using modern Discord.js practices and TypeScript.",
+				"A competitive entry Discord bot showcasing advanced features and unique functionality. Built using TypeScript and Buape's Carbon.",
 			tech: ["TypeScript", "Carbon"],
 			category: "bot",
 			liveUrl: "https://github.com/Xanderxx46/that-one-friend",
 			githubUrl: "https://github.com/Xanderxx46/that-one-friend",
-			image: "/api/placeholder/800/400",
 		},
 		{
 			title: "Emberisles",
 			description: "Minecraft server I helped make.",
 			longDescription:
-				"A custom Minecraft server featuring unique plugins and gameplay mechanics. Contributed to server development and management.",
+				"A custom Minecraft server featuring unique plugins and gameplay mechanics. I contributed to server development and management.",
 			tech: ["MC Plugins"],
 			category: "minecraft",
 			liveUrl: "https://discord.gg/hbSPbxnkH9",
 			githubUrl: "https://discord.gg/hbSPbxnkH9",
-			image: "/api/placeholder/800/400",
 		},
 		{
 			title: "Portfolio Site",
@@ -114,18 +111,16 @@ const ProjectsPage = () => {
 			category: "web",
 			liveUrl: "https://xanderxx.xyz",
 			githubUrl: "https://github.com/Xanderxx46/about-me-page",
-			image: "/api/placeholder/800/400",
 		},
 		{
 			title: "Xan Utils",
 			description: "Discord bot i made for fun.",
 			longDescription:
-				"A multipurpose Discord utility bot with various features including moderation tools, fun commands, and server management capabilities.",
+				"A multipurpose Discord utility bot with various features.",
 			tech: ["TypeScript", "Carbon"],
 			category: "bot",
 			liveUrl: "https://github.com/Xanderxx46/Xan-Utils",
 			githubUrl: "https://github.com/Xanderxx46/Xan-Utils",
-			image: "/api/placeholder/800/400",
 		},
 	];
 
