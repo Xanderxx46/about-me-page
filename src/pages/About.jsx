@@ -6,6 +6,7 @@ import { SiTypescript } from "react-icons/si";
 import { FaHtml5, FaCss3Alt, FaNode, FaReact } from "react-icons/fa";
 import { TbBrandMinecraft, TbBrandCarbon } from "react-icons/tb";
 import { VscBlank } from "react-icons/vsc";
+import { Link } from "react-router-dom";
 
 // Mock data for preview with added URLs
 const previewData = {
@@ -171,20 +172,20 @@ const Header = () => {
         <nav className="absolute top-8 right-8 z-20">
           <ul className="flex items-center space-x-6">
             <li>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-purple-300 hover:text-purple-400 transition-colors font-medium"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/projects"
+              <Link
+                to="/projects"
                 className="text-purple-300 hover:text-purple-400 transition-colors font-medium"
               >
                 My Projects
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
