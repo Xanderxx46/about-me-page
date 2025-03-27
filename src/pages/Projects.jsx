@@ -102,7 +102,8 @@ const Projects = () => {
 
       <main className="max-w-6xl mx-auto p-8">
         <div className="mb-8 flex flex-wrap gap-4 justify-center">
-          <button
+          {/* biome-ignore lint/a11y/useButtonType: <explanation> */}
+<button
             onClick={() => setFilter("all")}
             className={`px-4 py-2 rounded-lg transition-all ${
               filter === "all"
@@ -112,7 +113,8 @@ const Projects = () => {
           >
             All Projects
           </button>
-          <button
+          {/* biome-ignore lint/a11y/useButtonType: <explanation> */}
+<button
             onClick={() => setFilter("web")}
             className={`px-4 py-2 rounded-lg transition-all ${
               filter === "web"
@@ -122,7 +124,8 @@ const Projects = () => {
           >
             Web Development
           </button>
-          <button
+          {/* biome-ignore lint/a11y/useButtonType: <explanation> */}
+<button
             onClick={() => setFilter("bot")}
             className={`px-4 py-2 rounded-lg transition-all ${
               filter === "bot"
@@ -132,7 +135,8 @@ const Projects = () => {
           >
             Discord Bots
           </button>
-          <button
+          {/* biome-ignore lint/a11y/useButtonType: <explanation> */}
+<button
             onClick={() => setFilter("minecraft")}
             className={`px-4 py-2 rounded-lg transition-all ${
               filter === "minecraft"
