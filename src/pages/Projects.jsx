@@ -5,6 +5,7 @@ import { SiTypescript } from "react-icons/si";
 import { FaHtml5, FaCss3Alt, FaNode, FaReact } from "react-icons/fa";
 import { TbBrandMinecraft, TbBrandCarbon } from "react-icons/tb";
 import { Header } from "./About";
+import { Link } from "react-router-dom";
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
@@ -145,7 +146,7 @@ const Projects = () => {
 
         <div className="grid gap-8 md:grid-cols-2">
           {filteredProjects.map((project) => (
-            <a key={project.title} href={project.liveUrl}>
+            <div key={project.title}>
               <div className="bg-gray-800 rounded-lg overflow-hidden border border-purple-700/30 hover:border-purple-500 transition-all">
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
@@ -189,7 +190,7 @@ const Projects = () => {
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </main>
