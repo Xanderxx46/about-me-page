@@ -5,7 +5,6 @@ import { SiTypescript } from "react-icons/si";
 import { FaHtml5, FaCss3Alt, FaNode, FaReact } from "react-icons/fa";
 import { TbBrandMinecraft, TbBrandCarbon } from "react-icons/tb";
 import { Header } from "./About";
-import { Link } from "react-router-dom";
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
