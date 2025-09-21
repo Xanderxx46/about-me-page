@@ -1,6 +1,9 @@
-const passport = require('passport');
-const DiscordStrategy = require('passport-discord').Strategy;
-const db = require('../config/database');
+import passport from 'passport';
+import { Strategy as DiscordStrategy } from 'passport-discord';
+import db from './database.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

@@ -20,7 +20,9 @@
                 <% } %>
                 <a href="/auth/logout" class="nav-link logout">Logout</a>
             <% } else { %>
-                <a href="/auth/login" class="nav-link login">Login with Discord</a>
+                <% if (isAuthorizedIP) { %>
+                    <a href="/auth/login" class="nav-link login">Login with Discord</a>
+                <% } %>
             <% } %>
         </div>
         

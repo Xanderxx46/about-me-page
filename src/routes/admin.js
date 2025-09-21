@@ -1,6 +1,6 @@
-const express = require('express');
-const db = require('../config/database');
-const { isAuthenticated, isAuthorized } = require('../middleware/auth');
+import express from 'express';
+import db from '../config/database.js';
+import { isAuthenticated, isAuthorized } from '../middleware/auth.js';
 const router = express.Router();
 
 // Admin dashboard
@@ -201,4 +201,4 @@ router.post('/skills/:id/delete', isAuthenticated, isAuthorized, async (req, res
     }
 });
 
-module.exports = router;
+export default router;

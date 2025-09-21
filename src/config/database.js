@@ -1,8 +1,13 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+import pkg from 'sqlite3';
+const { Database } = pkg;
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const dbPath = path.join(__dirname, '../../data/database.sqlite');
-const db = new sqlite3.Database(dbPath);
+const db = new Database(dbPath);
 
 // Initialize database tables
 db.serialize(() => {
@@ -265,4 +270,4 @@ const database = {
     }
 };
 
-module.exports = database;
+export default database;

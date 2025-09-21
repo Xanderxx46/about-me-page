@@ -1,19 +1,22 @@
-const express = require('express');
-const session = require('express-session');
-const SQLiteStore = require('connect-sqlite3')(session);
-const passport = require('passport');
-const expressLayouts = require('express-ejs-layouts');
-const path = require('path');
-const fs = require('fs');
-require('dotenv').config();
+import express from 'express';
+import session from 'express-session';
+import SQLiteStore from 'connect-sqlite3';
+import passport from 'passport';
+import expressLayouts from 'express-ejs-layouts';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 
-// Initialize passport configuration after environment is loaded
-require('./config/passport');
+dotenv.config();
 
-const authRoutes = require('./routes/auth');
-const homeRoutes = require('./routes/home');
-const projectRoutes = require('./routes/projects');
-const adminRoutes = require('./routes/admin');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import authRoutes from './routes/auth.js';
+import homeRoutes from './routes/home.js';
+import projectRoutes from './routes/projects.js';
+import adminRoutes from './routes/admin.js';
 
 // Create data directory if it doesn't exist
 const dataDir = path.join(__dirname, '../data');
@@ -38,7 +41,7 @@ app.use(express.json());
 
 // Session configuration with SQLite store
 app.use(session({
-    store: new SQLiteStore({
+    store: new (SQLiteStore(session))({
         db: 'sessions.sqlite',
         dir: dataDir,
         table: 'sessions'
@@ -55,8 +58,13 @@ app.use(session({
 }));
 
 // Passport configuration
+import './config/passport.js';
 app.use(passport.initialize());
 app.use(passport.session());
+
+// IP authorization middleware
+import { isAuthorizedIP } from './middleware/ipAuth.js';
+app.use(isAuthorizedIP);
 
 // Make user and authorization status available in all templates
 app.use((req, res, next) => {
@@ -64,6 +72,7 @@ app.use((req, res, next) => {
     res.locals.isAuthorized = req.isAuthenticated() && 
         req.user && 
         req.user.discord_id === process.env.AUTHORIZED_DISCORD_ID;
+    res.locals.isAuthorizedIP = req.isAuthorizedIP;
     
     // Make current URL available for Open Graph tags
     res.locals.currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
@@ -105,4 +114,4 @@ app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
 
-module.exports = app;
+export default app;

@@ -1,6 +1,6 @@
-const express = require('express');
-const db = require('../config/database');
-const { isAuthorized } = require('../middleware/auth');
+import express from 'express';
+import db from '../config/database.js';
+import { isAuthorized } from '../middleware/auth.js';
 const router = express.Router();
 
 // Projects page
@@ -35,4 +35,4 @@ router.get('/', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

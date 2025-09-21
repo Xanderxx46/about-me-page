@@ -2,6 +2,7 @@
   "name": "about-site",
   "version": "1.0.0",
   "description": "Personal about me site with Discord authentication",
+  "type": "module",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",

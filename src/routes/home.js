@@ -1,6 +1,6 @@
-const express = require('express');
-const db = require('../config/database');
-const { isAuthorized } = require('../middleware/auth');
+import express from 'express';
+import db from '../config/database.js';
+import { isAuthorized } from '../middleware/auth.js';
 const router = express.Router();
 
 // Home page
@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
             }
         }
         
-        // Get all projects and take first 8 as featured
+        // Get all projects and featured projects
         const allProjects = userId ? await db.getProjects(userId) : [];
-        const featuredProjects = allProjects.slice(0, 8); // First 8 projects as featured
+        const featuredProjects = userId ? await db.getProjects(userId, true) : []; // Only featured projects
         const skills = userId ? await db.getSkills(userId) : [];
         
         res.render('home', {
@@ -42,4 +42,4 @@ router.get('/', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const express = require('express');
-const passport = require('passport');
+import express from 'express';
+import passport from 'passport';
 const router = express.Router();
 
 // Discord OAuth routes
@@ -41,4 +41,4 @@ router.post('/session-refresh', (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

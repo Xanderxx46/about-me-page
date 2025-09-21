@@ -30,7 +30,4 @@ const isAuthorized = (req, res, next) => {
     next();
 };
 
-module.exports = {
-    isAuthenticated,
-    isAuthorized
-};
+export { isAuthenticated, isAuthorized };
