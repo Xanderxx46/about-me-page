@@ -1,0 +1,24 @@
+<div class="admin-about">
+    <div class="container">
+        <div class="admin-header">
+            <h1>Edit About Me</h1>
+            <p>Update your personal description and information</p>
+        </div>
+        
+        <div class="form-container">
+            <form method="POST" action="/admin/about" class="form">
+                <div class="form-group">
+                    <label for="aboutMe">About Me</label>
+                    <textarea id="aboutMe" name="aboutMe" rows="10" class="form-control" 
+                              placeholder="Tell people about yourself, your interests, experience, and what you do..."><%= user.about_me || '' %></textarea>
+                    <small class="form-help">This text will be displayed on your home page in the About Me section.</small>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="/admin" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Update About Me</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

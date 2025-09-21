@@ -1,0 +1,145 @@
+<div class="hero-section">
+    <div class="container">
+        <% if (profileUser && profileUser.banner) { %>
+            <div class="hero-banner">
+                <img src="https://cdn.discordapp.com/banners/<%= profileUser.discord_id %>/<%= profileUser.banner %>.png?size=1024" 
+                     alt="Banner" class="banner-image">
+            </div>
+        <% } %>
+        
+        <div class="hero-content">
+            <div class="profile-section">
+                <% if (profileUser && profileUser.avatar) { %>
+                    <img src="https://cdn.discordapp.com/avatars/<%= profileUser.discord_id %>/<%= profileUser.avatar %>.png?size=256" 
+                         alt="Profile Picture" class="profile-picture">
+                <% } else { %>
+                    <div class="profile-picture placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                <% } %>
+                
+                <div class="profile-info">
+                    <h1 class="profile-name">
+                        <% if (profileUser) { %>
+                            <%= profileUser.displayName || profileUser.username %>
+                        <% } else { %>
+                            Your Name
+                        <% } %>
+                    </h1>
+                    <p class="profile-title">Full Stack Programmer, Discord Developer, and community manager</p>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <% if (profileUser && profileUser.about_me) { %>
+                        <p><%= profileUser.about_me %></p>
+                    <% } else { %>
+                        <p>Welcome to my portfolio! I'm a passionate developer who loves creating amazing web experiences. 
+                        This site showcases my projects, skills, and journey in the world of technology.</p>
+                        <% if (isAuthorized) { %>
+                            <p><a href="/admin/about" class="btn btn-primary">Edit About Me</a></p>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="skills-section">
+    <div class="container">
+        <h2>Skills & Technologies</h2>
+        <div class="skills-grid <%= skills && skills.length <= 6 ? 'few-skills' : 'many-skills' %>">
+            <% if (skills && skills.length > 0) { %>
+                <% skills.forEach(skill => { %>
+                    <% if (skill.url) { %>
+                        <a href="<%= skill.url %>" class="skill-card clickable" target="_blank">
+                    <% } else { %>
+                        <div class="skill-card">
+                    <% } %>
+                        <% if (skill.image_url) { %>
+                            <div class="skill-image">
+                                <img src="<%= skill.image_url %>" alt="<%= skill.name %>">
+                            </div>
+                        <% } %>
+                        <div class="skill-name"><%= skill.name %></div>
+                        <% if (skill.level) { %>
+                            <div class="skill-level"><%= skill.level %></div>
+                        <% } %>
+                        <% if (skill.category) { %>
+                            <div class="skill-category"><%= skill.category %></div>
+                        <% } %>
+                        <% if (skill.url) { %>
+                            <div class="skill-link-indicator">
+                                <i class="fas fa-external-link-alt"></i>
+                            </div>
+                        <% } %>
+                    <% if (skill.url) { %>
+                        </a>
+                    <% } else { %>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% } else { %>
+                <div class="no-skills">
+                    <p>No skills added yet.</p>
+                    <% if (isAuthorized) { %>
+                        <a href="/admin/skills/new" class="btn btn-primary">Add Skills</a>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<div class="featured-projects-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <a href="/projects" class="btn btn-outline">View All Projects</a>
+        </div>
+        
+        <div class="projects-grid <%= featuredProjects && featuredProjects.length === 3 ? 'three-projects' : featuredProjects && featuredProjects.length <= 2 ? 'few-projects' : 'many-projects' %>">
+            <% if (featuredProjects && featuredProjects.length > 0) { %>
+                <% featuredProjects.forEach(project => { %>
+                    <% const projectLink = project.project_url || project.github_url; %>
+                    <% if (projectLink) { %>
+                        <a href="<%= projectLink %>" class="project-card featured clickable" target="_blank">
+                    <% } else { %>
+                        <div class="project-card featured">
+                    <% } %>
+                        <div class="project-content">
+                            <% if (project.image_url) { %>
+                                <div class="project-image">
+                                    <img src="<%= project.image_url %>" alt="<%= project.title %>">
+                                </div>
+                            <% } %>
+                            <h3 class="project-title"><%= project.title %></h3>
+                            <p class="project-description"><%= project.description %></p>
+                            <% if (project.technologies) { %>
+                                <div class="project-technologies">
+                                    <% project.technologies.split(',').forEach(tech => { %>
+                                        <span class="tech-tag"><%= tech.trim() %></span>
+                                    <% }) %>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% if (projectLink) { %>
+                        </a>
+                    <% } else { %>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% } else { %>
+                <div class="no-projects">
+                    <p>No featured projects yet.</p>
+                    <% if (isAuthorized) { %>
+                        <a href="/admin/projects/new" class="btn btn-primary">Add Project</a>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

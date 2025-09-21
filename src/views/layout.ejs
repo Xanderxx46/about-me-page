@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    
+    <main class="main-content">
+        <%- body %>
+    </main>
+    
+    <%- include('partials/footer') %>
+    
+    <% if (user) { %>
+        <script>
+            // Make user object available globally for JavaScript
+            window.user = <%- JSON.stringify(user) %>;
+        </script>
+    <% } %>
+</body>
+</html>

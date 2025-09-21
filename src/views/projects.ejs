@@ -1,0 +1,67 @@
+<div class="projects-page">
+    <div class="container">
+        <div class="page-header">
+            <h1>All Projects</h1>
+            <p>Explore my complete portfolio of projects and work</p>
+        </div>
+        
+        <div class="projects-grid <%= projects && projects.length === 3 ? 'three-projects' : projects && projects.length <= 2 ? 'few-projects' : 'many-projects' %>">
+            <% if (projects && projects.length > 0) { %>
+                <% projects.forEach(project => { %>
+                    <% const projectLink = project.project_url || project.github_url; %>
+                    <div class="project-card <%= project.featured ? 'featured' : '' %> <%= projectLink ? 'clickable' : '' %>" 
+                         <%= projectLink ? `onclick="window.open('${projectLink}', '_blank')"` : '' %>>
+                        <% if (project.image_url) { %>
+                            <div class="project-image">
+                                <img src="<%= project.image_url %>" alt="<%= project.title %>">
+                                <% if (project.featured) { %>
+                                    <div class="featured-badge">Featured</div>
+                                <% } %>
+                            </div>
+                        <% } %>
+                        <div class="project-content">
+                            <h3 class="project-title"><%= project.title %></h3>
+                            <p class="project-description"><%= project.description %></p>
+                            <% if (project.technologies) { %>
+                                <div class="project-technologies">
+                                    <% project.technologies.split(',').forEach(tech => { %>
+                                        <span class="tech-tag"><%= tech.trim() %></span>
+                                    <% }) %>
+                                </div>
+                            <% } %>
+                            <div class="project-links">
+                                <% if (project.project_url) { %>
+                                    <a href="<%= project.project_url %>" class="project-link" target="_blank" onclick="event.stopPropagation()">
+                                        <i class="fas fa-external-link-alt"></i> Live Demo
+                                    </a>
+                                <% } %>
+                                <% if (project.github_url) { %>
+                                    <a href="<%= project.github_url %>" class="project-link" target="_blank" onclick="event.stopPropagation()">
+                                        <i class="fab fa-github"></i> GitHub
+                                    </a>
+                                <% } %>
+                            </div>
+                            <div class="project-meta">
+                                <span class="project-date">
+                                    <i class="fas fa-calendar"></i>
+                                    <%= new Date(project.created_at).toLocaleDateString() %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="no-projects">
+                    <div class="no-projects-content">
+                        <i class="fas fa-folder-open"></i>
+                        <h3>No projects yet</h3>
+                        <p>Check back soon for amazing projects!</p>
+                        <% if (isAuthorized) { %>
+                            <a href="/admin/projects/new" class="btn btn-primary">Add Your First Project</a>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

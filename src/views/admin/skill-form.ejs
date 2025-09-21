@@ -1,0 +1,69 @@
+<div class="admin-skill-form">
+    <div class="container">
+        <div class="admin-header">
+            <h1><%= skill ? 'Edit Skill' : 'Add New Skill' %></h1>
+            <p><%= skill ? 'Update your skill information' : 'Add a new skill to your profile' %></p>
+        </div>
+        
+        <div class="form-container">
+            <form method="POST" action="<%= skill ? `/admin/skills/${skill.id}` : '/admin/skills' %>" class="form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Skill Name *</label>
+                        <input type="text" id="name" name="name" class="form-control" 
+                               value="<%= skill ? skill.name : '' %>" required 
+                               placeholder="e.g., JavaScript, React, Python">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="level">Skill Level</label>
+                        <select id="level" name="level" class="form-control">
+                            <option value="">Select level</option>
+                            <option value="Beginner" <%= skill && skill.level === 'Beginner' ? 'selected' : '' %>>Beginner</option>
+                            <option value="Intermediate" <%= skill && skill.level === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
+                            <option value="Advanced" <%= skill && skill.level === 'Advanced' ? 'selected' : '' %>>Advanced</option>
+                            <option value="Expert" <%= skill && skill.level === 'Expert' ? 'selected' : '' %>>Expert</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" class="form-control">
+                        <option value="">Select category</option>
+                        <option value="Frontend" <%= skill && skill.category === 'Frontend' ? 'selected' : '' %>>Frontend</option>
+                        <option value="Backend" <%= skill && skill.category === 'Backend' ? 'selected' : '' %>>Backend</option>
+                        <option value="Database" <%= skill && skill.category === 'Database' ? 'selected' : '' %>>Database</option>
+                        <option value="DevOps" <%= skill && skill.category === 'DevOps' ? 'selected' : '' %>>DevOps</option>
+                        <option value="Mobile" <%= skill && skill.category === 'Mobile' ? 'selected' : '' %>>Mobile</option>
+                        <option value="Design" <%= skill && skill.category === 'Design' ? 'selected' : '' %>>Design</option>
+                        <option value="Other" <%= skill && skill.category === 'Other' ? 'selected' : '' %>>Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="imageUrl">Image URL</label>
+                    <input type="url" id="imageUrl" name="imageUrl" class="form-control" 
+                           value="<%= skill ? skill.image_url : '' %>" 
+                           placeholder="https://example.com/skill-icon.png">
+                    <small class="form-help">Optional: URL to an icon or image representing this skill</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="url">Documentation/Link URL</label>
+                    <input type="url" id="url" name="url" class="form-control" 
+                           value="<%= skill ? skill.url : '' %>" 
+                           placeholder="https://docs.example.com or https://example.com">
+                    <small class="form-help">Optional: Link to documentation, certification, or related resource</small>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="/admin" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">
+                        <%= skill ? 'Update Skill' : 'Add Skill' %>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

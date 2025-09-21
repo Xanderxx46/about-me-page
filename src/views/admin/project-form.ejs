@@ -1,0 +1,73 @@
+<div class="admin-project-form">
+    <div class="container">
+        <div class="admin-header">
+            <h1><%= project ? 'Edit Project' : 'Add New Project' %></h1>
+            <p><%= project ? 'Update your project information' : 'Add a new project to your portfolio' %></p>
+        </div>
+        
+        <div class="form-container">
+            <form method="POST" action="<%= project ? `/admin/projects/${project.id}` : '/admin/projects' %>" class="form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="title">Project Title *</label>
+                        <input type="text" id="title" name="title" class="form-control" 
+                               value="<%= project ? project.title : '' %>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imageUrl">Image URL</label>
+                        <input type="url" id="imageUrl" name="imageUrl" class="form-control" 
+                               value="<%= project ? project.image_url : '' %>" 
+                               placeholder="https://example.com/project-image.jpg">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" name="description" rows="4" class="form-control" 
+                              required placeholder="Describe your project..."><%= project ? project.description : '' %></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectUrl">Project URL</label>
+                        <input type="url" id="projectUrl" name="projectUrl" class="form-control" 
+                               value="<%= project ? project.project_url : '' %>" 
+                               placeholder="https://your-project.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="githubUrl">GitHub URL</label>
+                        <input type="url" id="githubUrl" name="githubUrl" class="form-control" 
+                               value="<%= project ? project.github_url : '' %>" 
+                               placeholder="https://github.com/username/project">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="technologies">Technologies</label>
+                    <input type="text" id="technologies" name="technologies" class="form-control" 
+                           value="<%= project ? project.technologies : '' %>" 
+                           placeholder="React, Node.js, MongoDB (comma separated)">
+                    <small class="form-help">Separate technologies with commas</small>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="featured" <%= project && project.featured ? 'checked' : '' %>>
+                        <span class="checkmark"></span>
+                        Featured Project
+                    </label>
+                    <small class="form-help">Featured projects will be displayed on the home page</small>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="/admin" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">
+                        <%= project ? 'Update Project' : 'Add Project' %>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
