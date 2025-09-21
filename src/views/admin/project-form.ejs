@@ -52,13 +52,23 @@
                     <small class="form-help">Separate technologies with commas</small>
                 </div>
                 
-                <div class="form-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="featured" <%= project && project.featured ? 'checked' : '' %>>
-                        <span class="checkmark"></span>
-                        Featured Project
-                    </label>
-                    <small class="form-help">Featured projects will be displayed on the home page</small>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="orderIndex">Display Order</label>
+                        <input type="number" id="orderIndex" name="orderIndex" class="form-control" 
+                               value="<%= project ? project.order_index : '0' %>" 
+                               placeholder="0" min="0">
+                        <small class="form-help">Lower numbers appear first (0 = first)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="featured" <%= project && project.featured ? 'checked' : '' %>>
+                            <span class="checkmark"></span>
+                            Featured Project
+                        </label>
+                        <small class="form-help">Featured projects will be displayed on the home page</small>
+                    </div>
                 </div>
                 
                 <div class="form-actions">

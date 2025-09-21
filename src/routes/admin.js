@@ -53,17 +53,18 @@ router.get('/projects/new', isAuthenticated, isAuthorized, (req, res) => {
 
 router.post('/projects', isAuthenticated, isAuthorized, async (req, res) => {
     try {
-        const { title, description, imageUrl, projectUrl, githubUrl, technologies, featured } = req.body;
+        const { title, description, imageUrl, projectUrl, githubUrl, technologies, featured, orderIndex } = req.body;
         
         await db.createProject({
             userId: req.user.id,
             title,
             description,
-            image_url: imageUrl,
-            project_url: projectUrl,
-            github_url: githubUrl,
+            imageUrl,
+            projectUrl,
+            githubUrl,
             technologies,
-            featured: featured === 'on'
+            featured: featured === 'on',
+            orderIndex: parseInt(orderIndex) || 0
         });
         
         res.redirect('/admin?success=project-added');
@@ -95,7 +96,7 @@ router.get('/projects/:id/edit', isAuthenticated, isAuthorized, async (req, res)
 
 router.post('/projects/:id', isAuthenticated, isAuthorized, async (req, res) => {
     try {
-        const { title, description, imageUrl, projectUrl, githubUrl, technologies, featured } = req.body;
+        const { title, description, imageUrl, projectUrl, githubUrl, technologies, featured, orderIndex } = req.body;
         
         await db.updateProject(req.params.id, {
             title,
@@ -104,7 +105,8 @@ router.post('/projects/:id', isAuthenticated, isAuthorized, async (req, res) => 
             project_url: projectUrl,
             github_url: githubUrl,
             technologies,
-            featured: featured === 'on'
+            featured: featured === 'on',
+            order_index: parseInt(orderIndex) || 0
         });
         
         res.redirect('/admin?success=project-updated');

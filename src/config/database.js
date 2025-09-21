@@ -38,6 +38,7 @@ db.serialize(() => {
         github_url TEXT,
         technologies TEXT,
         featured BOOLEAN DEFAULT 0,
+        order_index INTEGER DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users (id)
     )`);
@@ -65,6 +66,13 @@ db.serialize(() => {
     db.run(`ALTER TABLE skills ADD COLUMN image_url TEXT`, (err) => {
         if (err && !err.message.includes('duplicate column name')) {
             console.error('Error adding image_url column to skills:', err);
+        }
+    });
+
+    // Add order_index column to projects if it doesn't exist (migration)
+    db.run(`ALTER TABLE projects ADD COLUMN order_index INTEGER DEFAULT 0`, (err) => {
+        if (err && !err.message.includes('duplicate column name')) {
+            console.error('Error adding order_index column to projects:', err);
         }
     });
 });
@@ -143,7 +151,7 @@ const database = {
                 query += ' AND featured = 1';
             }
             
-            query += ' ORDER BY created_at DESC';
+            query += ' ORDER BY featured DESC, order_index ASC, created_at DESC';
             
             db.all(query, params, (err, rows) => {
                 if (err) reject(err);
@@ -154,10 +162,10 @@ const database = {
 
     async createProject(projectData) {
         return new Promise((resolve, reject) => {
-            const { userId, title, description, imageUrl, projectUrl, githubUrl, technologies, featured } = projectData;
+            const { userId, title, description, imageUrl, projectUrl, githubUrl, technologies, featured, orderIndex } = projectData;
             db.run(
-                'INSERT INTO projects (user_id, title, description, image_url, project_url, github_url, technologies, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                [userId, title, description, imageUrl, projectUrl, githubUrl, technologies, featured ? 1 : 0],
+                'INSERT INTO projects (user_id, title, description, image_url, project_url, github_url, technologies, featured, order_index) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [userId, title, description, imageUrl, projectUrl, githubUrl, technologies, featured ? 1 : 0, orderIndex || 0],
                 function(err) {
                     if (err) reject(err);
                     else resolve({ id: this.lastID, ...projectData });
