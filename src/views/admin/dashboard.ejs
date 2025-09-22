@@ -136,3 +136,23 @@
         </div>
     </div>
 </div>
+
+<script>
+// Convert alerts to toast notifications
+document.addEventListener('DOMContentLoaded', function() {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+        const message = alert.textContent.trim();
+        const type = alert.classList.contains('alert-success') ? 'success' : 
+                    alert.classList.contains('alert-error') ? 'error' : 'info';
+        
+        // Show toast notification
+        if (window.AboutMeSite && window.AboutMeSite.showNotification) {
+            window.AboutMeSite.showNotification(message, type);
+        }
+        
+        // Remove the alert
+        alert.remove();
+    });
+});
+</script>

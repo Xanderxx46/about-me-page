@@ -42,4 +42,33 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Search functionality
+router.get('/search', async (req, res) => {
+    try {
+        const { q } = req.query;
+        const authorizedDiscordId = process.env.AUTHORIZED_DISCORD_ID;
+        let user = null;
+        let userId = null;
+        
+        if (authorizedDiscordId) {
+            user = await db.getUserByDiscordId(authorizedDiscordId);
+            if (user) {
+                userId = user.id;
+            }
+        }
+        
+        if (!userId || !q) {
+            return res.json({ projects: [], skills: [] });
+        }
+        
+        // Search projects and skills
+        const searchResults = await db.searchContent(userId, q);
+        
+        res.json(searchResults);
+    } catch (error) {
+        console.error('Error searching:', error);
+        res.json({ projects: [], skills: [] });
+    }
+});
+
 export default router;

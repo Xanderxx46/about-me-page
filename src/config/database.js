@@ -275,6 +275,52 @@ const database = {
                 else resolve(row);
             });
         });
+    },
+
+    async searchContent(userId, query) {
+        return new Promise((resolve, reject) => {
+            const searchTerm = `%${query}%`;
+            
+            // Search projects
+            const projectQuery = `
+                SELECT 'project' as type, id, title, description, technologies, featured, order_index
+                FROM projects 
+                WHERE user_id = ? AND (
+                    title LIKE ? OR 
+                    description LIKE ? OR 
+                    technologies LIKE ?
+                )
+                ORDER BY featured DESC, order_index ASC, created_at DESC
+            `;
+            
+            // Search skills
+            const skillQuery = `
+                SELECT 'skill' as type, id, name, description, category, level
+                FROM skills 
+                WHERE user_id = ? AND (
+                    name LIKE ? OR 
+                    description LIKE ? OR 
+                    category LIKE ?
+                )
+                ORDER BY category ASC, name ASC
+            `;
+            
+            db.all(projectQuery, [userId, searchTerm, searchTerm, searchTerm], (err, projects) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                
+                db.all(skillQuery, [userId, searchTerm, searchTerm, searchTerm], (err, skills) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    
+                    resolve({ projects, skills });
+                });
+            });
+        });
     }
 };
 
