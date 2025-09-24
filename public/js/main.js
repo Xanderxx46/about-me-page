@@ -137,55 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     skillCards.forEach(card => skillObserver.observe(card));
     
-    // Search functionality
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const clearSearchBtn = document.getElementById('clearSearch');
-    
-    if (searchInput && searchResults && clearSearchBtn) {
-        let searchTimeout;
-        
-        // Debounced search function with loading
-        const performSearch = debounce(async (query) => {
-            if (query.length < 2) {
-                searchResults.style.display = 'none';
-                clearSearchBtn.style.display = 'none';
-                return;
-            }
-            
-            performSearchWithLoading(query);
-            clearSearchBtn.style.display = 'block';
-        }, 300);
-        
-        // Search input event listener
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.trim();
-            performSearch(query);
-        });
-        
-        // Clear search button
-        clearSearchBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            searchResults.style.display = 'none';
-            clearSearchBtn.style.display = 'none';
-            searchInput.focus();
-        });
-        
-        // Hide results when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.style.display = 'none';
-            }
-        });
-        
-        // Keyboard navigation
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                searchResults.style.display = 'none';
-                searchInput.blur();
-            }
-        });
-    }
     
     // Projects filtering functionality
     if (window.projectsData) {
@@ -349,45 +300,6 @@ function throttle(func, limit) {
 }
 
 // Search results display function
-function displaySearchResults(data, query) {
-    const searchResults = document.getElementById('searchResults');
-    if (!searchResults) return;
-    
-    const { projects, skills } = data;
-    const allResults = [...projects, ...skills];
-    
-    if (allResults.length === 0) {
-        searchResults.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
-        return;
-    }
-    
-    const resultsHtml = allResults.map(item => {
-        const isProject = item.type === 'project';
-        const title = isProject ? item.title : item.name;
-        const description = isProject ? item.description : item.description;
-        const additionalInfo = isProject ? 
-            (item.technologies ? `Technologies: ${item.technologies}` : '') :
-            `Category: ${item.category} | Level: ${item.level}`;
-        
-        return `
-            <div class="search-result-item">
-                <div class="search-result-type">${isProject ? 'Project' : 'Skill'}</div>
-                <div class="search-result-title">${highlightText(title, query)}</div>
-                <div class="search-result-description">${highlightText(description || '', query)}</div>
-                ${additionalInfo ? `<div class="search-result-description small-text">${additionalInfo}</div>` : ''}
-            </div>
-        `;
-    }).join('');
-    
-    searchResults.innerHTML = resultsHtml;
-}
-
-// Highlight search terms in text
-function highlightText(text, query) {
-    if (!query || !text) return text;
-    const regex = new RegExp(`(${query})`, 'gi');
-    return text.replace(regex, '<span class="search-highlight">$1</span>');
-}
 
 // Initialize project filters
 function initializeProjectFilters() {
@@ -752,47 +664,14 @@ function setButtonLoading(button, isLoading) {
 }
 
 // Enhanced search with loading
-function performSearchWithLoading(query) {
-    const searchResults = document.getElementById('searchResults');
-    if (!searchResults) return;
-    
-    if (query.length < 2) {
-        searchResults.style.display = 'none';
-        return;
-    }
-    
-    // Show loading state
-    searchResults.style.display = 'block';
-    searchResults.innerHTML = `
-        <div class="skeleton-card">
-            <div class="skeleton skeleton-line long"></div>
-            <div class="skeleton skeleton-line medium"></div>
-            <div class="skeleton skeleton-line short"></div>
-        </div>
-    `;
-    
-    // Perform search
-    fetch(`/search?q=${encodeURIComponent(query)}`)
-        .then(response => response.json())
-        .then(data => {
-            displaySearchResults(data, query);
-        })
-        .catch(error => {
-            console.error('Search error:', error);
-            searchResults.innerHTML = '<div class="no-results">Search failed. Please try again.</div>';
-        });
-}
 
 // Export for use in other scripts
 window.AboutMeSite = {
     showNotification,
     debounce,
     throttle,
-    displaySearchResults,
-    highlightText,
     showLoadingOverlay,
     hideLoadingOverlay,
     showSkeletonLoading,
-    setButtonLoading,
-    performSearchWithLoading
+    setButtonLoading
 };

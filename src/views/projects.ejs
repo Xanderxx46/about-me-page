@@ -5,42 +5,6 @@
             <p>Explore my complete portfolio of projects and work</p>
         </div>
         
-        <!-- Filters -->
-        <div class="filters-section">
-            <div class="filter-group">
-                <label for="statusFilter">Status:</label>
-                <select id="statusFilter" class="filter-select">
-                    <option value="all">All Projects</option>
-                    <option value="featured">Featured Only</option>
-                    <option value="non-featured">Non-Featured</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label for="techFilter">Technology:</label>
-                <select id="techFilter" class="filter-select">
-                    <option value="all">All Technologies</option>
-                    <!-- Options will be populated by JavaScript -->
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label for="sortFilter">Sort By:</label>
-                <select id="sortFilter" class="filter-select">
-                    <option value="order">Display Order</option>
-                    <option value="name">Project Name</option>
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                </select>
-            </div>
-            
-            <button id="clearFilters" class="btn btn-secondary btn-sm">Clear Filters</button>
-            
-            <div class="pagination-info">
-                <span id="resultsCount">0 projects</span>
-            </div>
-        </div>
-        
         <div id="projectsContainer" class="projects-grid <%= projects && projects.length === 3 ? 'three-projects' : projects && projects.length <= 2 ? 'few-projects' : 'many-projects' %>">
             <% if (projects && projects.length > 0) { %>
                 <% projects.forEach(project => { %>

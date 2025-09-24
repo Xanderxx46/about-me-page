@@ -15,7 +15,7 @@
     <% if (user) { %>
         <script>
             // Make user object available globally for JavaScript
-            window.user = <%- JSON.stringify(user) %>;
+            window.user = JSON.parse('<%- JSON.stringify(JSON.stringify(user || [])) %>');
         </script>
     <% } %>
 </body>
